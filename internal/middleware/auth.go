@@ -51,6 +51,10 @@ func (m *Middleware) AuthMiddleware() fiber.Handler {
 			return c.Status(fiber.StatusUnauthorized).JSON(models.NewErrorResponse("unauthorized"))
 		}
 
+		if err != nil {
+			return c.Status(fiber.StatusUnauthorized).JSON(models.NewErrorResponse("unable to authenticate"))
+		}
+
 		return c.Next()
 
 	}
